@@ -2,26 +2,27 @@
 using System.Collections;
 
 public class motionCharacter : MonoBehaviour {
-	public GameObject Camera=null,Personaje=null;
+	public Transform Camera=null,Personaje=null;
 	public float velocidadMovimiento = 2f,velocidadCamara=2f;
 	public bool LimitarCamara=false;
 	public int limiteInferior=45,limiteSuperior=45;
 	private float x=0f, y=0f;
 	void Start () {
 		if (Camera == null)
-			Camera=GameObject.FindGameObjectWithTag ("MainCamera");
+			Camera=GameObject.FindGameObjectWithTag ("MainCamera").transform;
 		if (Personaje == null)
-			Personaje = this.gameObject;
+			Personaje = this.gameObject.transform;
 		
 	}
 
 	void FixedUpdate () {
-//		
+		//		
+//		Camera=GameObject.FindGameObjectWithTag ("MainCamera");
 		//Movimiento Personaje x y
-		Personaje.transform.Translate(Input.GetAxis ("Horizontal")* velocidadMovimiento * Time.deltaTime, 0, Input.GetAxis ("Vertical")* velocidadMovimiento * Time.deltaTime);
+		Personaje.Translate(Input.GetAxis ("Horizontal")* velocidadMovimiento * Time.deltaTime, 0, Input.GetAxis ("Vertical")* velocidadMovimiento * Time.deltaTime);
 
 		//Copia el angulo de la camara z
-		Personaje.gameObject.transform.eulerAngles=new Vector3(0,Camera.gameObject.transform.eulerAngles.y,0);
+		Personaje.eulerAngles=new Vector3(0,Camera.eulerAngles.y,0);
 
 		//Movimiento Camara
 
@@ -43,6 +44,6 @@ public class motionCharacter : MonoBehaviour {
 			y += Input.GetAxis ("Mouse Y")*velocidadCamara;
 		}
 		x += Input.GetAxis ("Mouse X")*velocidadCamara;
-		Camera.gameObject.transform.rotation = Quaternion.Euler(-y,x,0 );
+		Camera.rotation = Quaternion.Euler(-y,x,0 );
 	}
 }
