@@ -16,8 +16,6 @@ public class motionCharacter : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		//		
-//		Camera=GameObject.FindGameObjectWithTag ("MainCamera");
 		//Movimiento Personaje x y
 		Personaje.Translate(Input.GetAxis ("Horizontal")* velocidadMovimiento * Time.deltaTime, 0, Input.GetAxis ("Vertical")* velocidadMovimiento * Time.deltaTime);
 
@@ -45,5 +43,9 @@ public class motionCharacter : MonoBehaviour {
 		}
 		x += Input.GetAxis ("Mouse X")*velocidadCamara;
 		Camera.rotation = Quaternion.Euler(-y,x,0 );
+
+
+		//Script de actualizacion de Camara Principal para cambiar automaticamente, se ha quitado por rendimiento.
+		//Camera=GameObject.FindGameObjectWithTag ("MainCamera");
 	}
 }
